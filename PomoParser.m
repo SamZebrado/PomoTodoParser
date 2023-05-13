@@ -1,10 +1,3 @@
-% 该脚本用于将导出的番茄土豆网站记录的CSV文件进行处理和拆分，并生成新的CSV文件用于进一步统计操作。
-%
-%
-% Sam Z. Shan with the draft and help from ChatGPT
-% May 13, 2023
-
-
 % 读取CSV文件
 data = readtable('Pomos - 2014-04-01 - 2023-05-12.csv');
 default_timezone = 8;% +08:00 Beijing
