@@ -5,8 +5,10 @@
 % May 13, 2023
 
 
+InputFile = 'Pomos - 2014-04-01 - 2024-09-15 Manually.csv';
+OutputFile = 'ParsedPomos-Sept15-2024.csv';
 % 读取CSV文件
-data = readtable('Pomos - 2014-04-01 - 2023-05-12.csv');
+data = readtable(InputFile);
 default_timezone = 8;% +08:00 Beijing
 
 % 创建新的数据表
@@ -18,14 +20,19 @@ newData.end_time = strings(0);
 newData.description = strings(0);
 newData.approximate = zeros(0, 1);
 newData.duration = zeros(0);
-
+%%
 % 遍历每一行记录
 for ii = 1:size(data, 1)
     % 获取当前记录的信息
     datetimeStr = data.started_at{ii};
     endTimeStr = data.ended_at{ii};
     description = data.description{ii};
-    
+    if isempty(description)
+    fprintf('Empty Event: Please check and deal with it manually.\n')
+    pause(10)
+    fprintf('Will skip it\n')
+    continue;
+    end
     % 解析日期、开始时间和结束时间
     pattern = '(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})([-+]\d{2}:\d{2})';
     tokens = regexp(datetimeStr, pattern, 'tokens');
@@ -102,13 +109,17 @@ for ii = 1:size(data, 1)
         newRecord.description = events{jj};
         newRecord.approximate = approximates(jj);
         
-
+        % Update the current start time for the next event
+        cur_stTime = cur_edTime; % Increment the start time for the next event
+   
         
         % 添加新记录到新数据表
         newData = [newData; newRecord];
-        fprintf('New Record %i from Old Record %i\n',jj,ii)
+        if mod(ii,2000)==1
+            fprintf('New Record %i from Old Record %i\n',jj,ii)
+        end
     end
 end
 
 % 将数据保存为CSV文件
-writetable(newData, 'output.csv');
+writetable(newData, OutputFile);
