@@ -43,3 +43,9 @@
 
 # CalculateTotalTime
 为一个列表中每一个关键词计算包含该关键词事件的总时间。
+
+# ConvertMultipleArrivalCSVToPomoRecords.xlsx
+[这个网站](https://stopwatch.online-timers.com/stopwatch-with-time-intervals)可以方便地连续记录时间和导出CSV文件
+针对它的输出，我做了一个excel处理表格
+只需要粘贴到指定位置，修改好标签
+就可以方便地编辑和生成连续的番茄记录
