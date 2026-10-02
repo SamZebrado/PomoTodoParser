@@ -1,6 +1,6 @@
 # Status / 状态
 
-Personal-use MATLAB scripts and a spreadsheet utility; the last recorded update is February 2025. No automated tests or supported MATLAB version are declared. Edit the input/output filenames before running, and work on copies of your CSV exports. The parser currently writes `ParsedPomos-Sept15-2024.csv`; the statistics scripts read `output.csv`, so update those names to use the same file. No private input CSV is included.
+Personal-use MATLAB scripts and a spreadsheet utility; the last recorded functional update to the scripts/workbook is from February 2025; documentation was updated in October 2026. No automated tests or supported MATLAB version are declared. Edit the input/output filenames before running, and work on copies of your CSV exports. The parser currently writes `ParsedPomos-Sept15-2024.csv`; the statistics scripts read `output.csv`, so update those names to use the same file. No private input CSV is included.
 
 ## Current split limitation / 当前拆分限制
 
