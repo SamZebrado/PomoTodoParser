@@ -1,3 +1,13 @@
+# Status / 状态
+
+Personal-use MATLAB scripts and a spreadsheet utility; the last recorded functional update to the scripts/workbook is from February 2025; documentation was updated in October 2026. No automated tests or supported MATLAB version are declared. Edit the input/output filenames before running, and work on copies of your CSV exports. The parser currently writes `ParsedPomos-Sept15-2024.csv`; the statistics scripts read `output.csv`, so update those names to use the same file. No private input CSV is included.
+
+## Current split limitation / 当前拆分限制
+
+The parser preserves explicitly entered durations. For each event without a duration, it divides the remaining time by the **total number of events**, including those with explicit durations. For the example below, the approximately 50-minute record therefore becomes 8 minutes, 2 minutes, and approximately 13.3 minutes; it does not preserve the total record duration. The original intended 8 + 2 + 40-minute allocation is not implemented. Review results manually before using them for statistics. This documentation correction does not change the parsing algorithm.
+
+当前脚本保留明确记录的分钟数；没有分钟数的事项会分到“剩余时间 / 全部事项数”，所以不能保证拆分后总时长守恒。下文的例子说明原始目标；实际结果和限制以上面的说明为准。
+
 我使用有一些额外规则（见下文PomoParser中的例子）番茄土豆app记录了生活中几乎所有事件；
 在ChatGPT的帮助下终于可以把混在一起的事件拆分开来并且做统计了😂
 
@@ -11,7 +21,7 @@
 **例子**：
 我的description中存在一条记录包含多个事项的情况，用+分隔。
 有的事项包含了消耗时间，会直接记录，如果时间不是很准确会注明“大概”
-没有记录时间的事项默认平分剩余时间。
+原始目标是让没有记录时间的事项平分剩余时间；当前实现存在上文说明的限制。
 比如某一行的内容是：
         sdfsdf, 
         2023-04-13T07:43:09+08:00, 
@@ -33,7 +43,7 @@
         和“#Life 刷B站”
 三个事件;
 
-将总共的50分钟时间拆分成8分钟，2分钟和40分钟，
+原始目标：将总共约50分钟时间拆分成8分钟，2分钟和约40分钟（当前实现不满足这个分配），
 从07:43:09到08:33:02分割三个事件的起止时间；
 另外需要加一列“大概”用1和0记录事件的时间是否包含“大概”字样，
 这三个事件的“大概”列内容为1，1，0。
